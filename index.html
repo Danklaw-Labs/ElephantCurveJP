@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>象の曲線</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Noto+Serif+JP:wght@400;600&family=Noto+Sans+JP:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f2f5f9;--panel:#ffffff;--ink:#141a2b;--mute:#566079;--line:#d9dfea;
+  --c1:#b97a0f;--c2:#0f8a76;--c3:#3558c8;--c4:#923a9f;
+  --d:'Bricolage Grotesque','Noto Sans JP','Hiragino Sans','Yu Gothic',Meiryo,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --s:'Source Serif 4','Noto Serif JP','Hiragino Mincho ProN','Yu Mincho',Georgia,'Times New Roman',serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0f1320;--panel:#171c2c;--ink:#e9edf6;--mute:#a0aac0;--line:#283049;--c1:#e4a93f;--c2:#3fc7ae;--c3:#82a0f5;--c4:#cd87dc}
+}
+:root[data-theme="dark"]{--bg:#0f1320;--panel:#171c2c;--ink:#e9edf6;--mute:#a0aac0;--line:#283049;--c1:#e4a93f;--c2:#3fc7ae;--c3:#82a0f5;--c4:#cd87dc}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.95 var(--s);line-break:strict}
+main{max-width:60rem;margin:0 auto;padding:3.5rem 1.25rem 4rem}
+h1{font:800 clamp(3rem,13vw,6rem)/1.1 var(--d);letter-spacing:.02em;margin:0 0 1rem}
+.sub{max-width:36rem;font:400 1.15rem/1.6 var(--s);color:var(--mute);margin:0 0 2rem}
+.note{max-width:44rem;margin:0 0 2.5rem;padding:1rem 1.25rem;border-left:4px solid var(--mute);background:var(--panel);color:var(--mute);font-size:.95rem;line-height:1.85}
+p{max-width:44rem;margin:0 0 1.25rem}
+figure{margin:2.75rem 0 3rem;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1rem .85rem}
+.scroll{overflow-x:auto}
+svg{display:block;min-width:36rem;width:100%;height:auto}
+svg text{font:500 14px var(--d);fill:var(--mute)}
+.curve{stroke-dasharray:1 1;stroke-dashoffset:1;animation:draw 2.4s ease-out .2s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.curve{animation:none;stroke-dashoffset:0}}
+.leg{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin:.6rem .25rem 0;font:600 .92rem var(--d)}
+.leg span::before{content:"";display:inline-block;width:.7rem;height:.7rem;border-radius:50%;background:var(--k);margin-right:.45rem}
+figcaption{font:.85rem/1.4 var(--d);color:var(--mute);margin:.5rem .25rem 0}
+.seg{max-width:44rem;margin:0 0 2.25rem;padding-left:1.25rem;border-left:6px solid var(--k)}
+.tag{display:inline-block;margin-bottom:.5rem;padding:.1rem .8rem;border-radius:999px;font:700 1rem var(--d);color:var(--k);background:color-mix(in srgb,var(--k) 14%,transparent)}
+.tag i{font-style:normal;opacity:.6}.tag i:first-child{margin-left:-.5em}.tag i:last-child{margin-right:-.5em}
+.seg p{margin:0}
+h2{max-width:44rem;font:700 clamp(1.4rem,4.5vw,1.9rem)/1.45 var(--d);letter-spacing:0;margin:3.5rem 0 1.5rem}
+ol{list-style:none;max-width:44rem;margin:0 0 3rem;padding:0}
+ol li{margin:0 0 1.1rem;padding:.2rem 0 .2rem 1.1rem;border-left:5px solid var(--k)}
+ol li:nth-child(1){--k:var(--c1)}ol li:nth-child(2){--k:var(--c2)}ol li:nth-child(3){--k:var(--c3)}ol li:nth-child(4){--k:var(--c4)}
+ol li b{font-family:var(--d);font-weight:800}
+h3{font:700 1.1rem var(--d);margin:0 0 .6rem;padding-top:1.5rem;border-top:1px solid var(--line);max-width:44rem}
+.src{list-style:none;margin:0;padding:0;max-width:44rem;font-size:.95rem;line-height:1.5}
+.src li{margin:0 0 .6rem;overflow-wrap:anywhere}
+a{color:var(--c3)}
+a:focus-visible{outline:2px solid var(--c3);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<h1>象の曲線</h1>
+<p class="sub">グローバル所得分配： ベルリンの壁の崩壊から大不況まで</p>
+
+<aside class="note">（前書き：残念ながら、現実の事情や世代間の格差が依然として解消されていないことから、プロジェクト・ヨーロッパのさらなる延期をお知らせせざるを得ません。そこで、今回も用語プロンプトをお届けします）</aside>
+
+<p>ドイツの経済学者クリストフ・ラクナーとセルビアの経済学者ブランコ・ミラノヴィッチは、2015年に「グローバル所得分配： ベルリンの壁の崩壊から大不況まで」と題する論文を発表しました。この研究は、不平等研究のためにこれまでにまとめられた中で最も包括的な家計所得調査データベースの一つを構築したものです。ちなみに、この時間軸はグローバリズムの影響をめぐる大きな議論も巻き起こしました。</p>
+
+<p>発表当時、その曲線は象に似ており、急勾配で上昇する背中、ゼロ近くまで急降下する部分、そして最後に再び上昇する形状をしていました。この研究手法では、100カ国以上の国家世帯調査データを活用し、それらを2005年の購買力平価（PPP）ドルに換算して統一した。この期間には、広大な新たな労働市場を開いた共産主義の崩壊と、高度なグローバル化の時代を突然終わらせた世界金融危機という、2つの地政学的断絶が明らかになった。重要な点として、このデータは名目上の変化ではなく、インフレ調整済みの一人当たり実質所得の伸びを表しており、これにより国間の比較に意味を持たせている。</p>
+
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 720 330" role="img" aria-label="象の曲線の模式図：急勾配で上昇する背中、ゼロ近くまで急降下する部分、最後に再び上昇する形状">
+<defs>
+<linearGradient id="g" gradientUnits="userSpaceOnUse" x1="60" x2="700" y1="0" y2="0">
+<stop offset=".3" style="stop-color:var(--c1)"/><stop offset=".5" style="stop-color:var(--c2)"/><stop offset=".78" style="stop-color:var(--c3)"/><stop offset=".95" style="stop-color:var(--c4)"/>
+</linearGradient>
+</defs>
+<rect x="60" y="20" width="260" height="260" style="fill:var(--c1)" opacity=".1"/>
+<rect x="320" y="20" width="180" height="260" style="fill:var(--c2)" opacity=".1"/>
+<rect x="500" y="20" width="140" height="260" style="fill:var(--c3)" opacity=".1"/>
+<rect x="640" y="20" width="60" height="260" style="fill:var(--c4)" opacity=".1"/>
+<path d="M60 280V20M60 280H700" style="stroke:var(--mute)" fill="none" stroke-width="1.5"/>
+<path d="M60 210C120 208 170 120 230 78C270 52 310 44 350 50C400 58 440 150 480 230C500 262 530 268 565 268C620 268 665 190 700 64L700 280L60 280Z" fill="url(#g)" opacity=".16"/>
+<path class="curve" pathLength="1" d="M60 210C120 208 170 120 230 78C270 52 310 44 350 50C400 58 440 150 480 230C500 262 530 268 565 268C620 268 665 190 700 64" fill="none" stroke="url(#g)" stroke-width="6" stroke-linecap="round"/>
+<text x="68" y="62">急勾配で上昇する背中</text>
+<text x="470" y="128">ゼロ近くまで</text>
+<text x="470" y="146">急降下する部分</text>
+<text x="660" y="100" text-anchor="end">最後に再び上昇する形状</text>
+<text x="380" y="312" text-anchor="middle">グローバル所得分配（最貧層から最富裕層へ）</text>
+<text transform="translate(18 150) rotate(-90)" text-anchor="middle">実質所得の伸び</text>
+</svg>
+</div>
+<div class="leg">
+<span style="--k:var(--c1)">下位50％</span><span style="--k:var(--c2)">中間40％</span><span style="--k:var(--c3)">上位10％</span><span style="--k:var(--c4)">上位1％</span>
+</div>
+<figcaption>上で述べた曲線の模式図です。縮尺は正確ではありません。</figcaption>
+</figure>
+
+<section class="seg" style="--k:var(--c1)">
+<span class="tag"><i>（</i>下位50％<i>）</i></span>
+<p>この研究は、サハラ以南のアフリカや南アジアといった最も貧しい地域の一部は、そもそも基礎所得が低かったため、自由貿易を重視する世界秩序からほとんど恩恵を受けていないと結論づけた。多くの地域では、20年にわたる成長を経てもなお、1日1.25ドル未満の水準にとどまっていた。</p>
+</section>
+
+<section class="seg" style="--k:var(--c2)">
+<span class="tag"><i>（</i>中間40％<i>）</i></span>
+<p>最も注目された「勝者」は、中国、インド、タイ、ベトナム、インドネシアであり、これらの国々では5億人をはるかに超える人々が、1日1.25ドルの極貧ラインから脱却した。しかし、ミラノヴィッチ氏自身が指摘したように、中国では大規模な農村から都市への人口移動が進行したため、統計上の改善の大部分は中国によるものである。</p>
+</section>
+
+<section class="seg" style="--k:var(--c3)">
+<span class="tag"><i>（</i>上位10％<i>）</i></span>
+<p>一方、大幅な落ち込みが見られるのは、高所得国の中産階級であり、その所得は停滞しているか、ごくわずかにしか増加していない。この停滞は、高度に発展した世界全体におけるポピュリズム台頭の主要因としてしばしば挙げられている。</p>
+</section>
+
+<section class="seg" style="--k:var(--c4)">
+<span class="tag"><i>（</i>上位1％<i>）</i></span>
+<p>しかし、米国、東アジア、西ヨーロッパといった同じ高度に発展した地域において、最も著しい成長が見られたのは最富裕層の間であった。彼らの基礎所得はすでに莫大であったため、わずかなパーセンテージの増加でも、巨額の追加所得につながった。さらに注目すべきは、上位1％の50％が米国に居住していたことである。</p>
+</section>
+
+<h2>その後の研究により、4つの結論が導き出された。</h2>
+<ol>
+<li><b>第一に、</b>グローバリズムは地球上で最も貧しい国々の経済をほとんど改善していない。</li>
+<li><b>第二に、</b>「中堅」国、特に中国はグローバリズムの恩恵を受けている。</li>
+<li><b>第三に、</b>富裕な先進国の中産階級は、実質賃金の伸びが見られなかったか、あるいは実質的にはごくわずかな伸びにとどまった。</li>
+<li><b>第四に、</b>最大の受益者はすでに富裕層であり、彼らは世界中の機会をより巧みに活用・維持し、すでに莫大な富をさらに拡大させている。</li>
+</ol>
+
+<h3>使用した情報源：</h3>
+<ul class="src">
+<li><a href="https://openknowledge.worldbank.org/entities/publication/16065899-c37d-5750-af68-e9742cec9456" target="_blank" rel="noopener noreferrer">https://openknowledge.worldbank.org/entities/publication/16065899-c37d-5750-af68-e9742cec9456</a></li>
+<li><a href="https://www.brookings.edu/articles/whats-happening-to-the-world-income-distribution-the-elephant-chart-revisited/" target="_blank" rel="noopener noreferrer">https://www.brookings.edu/articles/whats-happening-to-the-world-income-distribution-the-elephant-chart-revisited/</a></li>
+</ul>
+</main>
+</body>
+</html>
